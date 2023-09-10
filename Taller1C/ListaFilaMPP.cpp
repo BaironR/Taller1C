@@ -17,19 +17,15 @@ void ListaFilaMPP::agregar(Vehiculo* vehiculo, int fila, int columna){
 			return;
 		}
 
-		NodoMPP* aux = this->cabeza->get_izquierdo();
+		NodoMPP* actual = this->cabeza->get_izquierdo();
+		NodoMPP* anterior = this->cabeza;
 
-		while (aux != this->cabeza){
-
-			if (columna == aux->get_columna() && fila == aux->get_fila()){
-				return;
-			}
-
-			else if (columna > aux->get_columna() && ) {
-
-			}
-			aux = aux->get_izquierdo();
+		while (actual != this->cabeza && actual->get_columna() > columna){
+			anterior = this->cabeza->get_izquierdo();
+			actual = this->cabeza->get_izquierdo();
 		}
 
+		nodo->set_izquierdo(actual);
+		anterior->set_izquierdo(nodo);
 	}
 }
