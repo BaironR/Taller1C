@@ -12,7 +12,6 @@ Menu::Menu(){
 void Menu::iniciar(){
 
 	while (true) {
-
 		std::cout<<
 			       "****************************************\n"  
 			       "             Menú sistema PAL           \n" 
@@ -26,7 +25,8 @@ void Menu::iniciar(){
 		std::string opcion;
 		std::cin >> opcion;
 
-		if (opcion == "5") {
+		if (opcion == "5"){
+		    std::cout << "Programa finalizado. Muchas gracias";
 			break;
 		}
 
@@ -41,7 +41,6 @@ void Menu::estacionar_vehiculo(){
 	int cant_aleatoria = 1 + rand() % 600;
 	std::queue<Vehiculo*> cola;
 	std::set<std::string> conjunto;
-	srand(time(nullptr));
 
 	while (cant_aleatoria != 0) {
 
@@ -68,6 +67,8 @@ void Menu::estacionar_vehiculo(){
 
 		cant_aleatoria--;
 	}
+
+	conjunto.clear();
 
 	while (!cola.empty()) {
 		Vehiculo* vehiculo = cola.front();
