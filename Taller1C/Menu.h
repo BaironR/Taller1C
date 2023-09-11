@@ -5,6 +5,7 @@
 class Menu{
 
 public:
+	Menu();
 	void iniciar();
 	void estacionar_vehiculo();
 	void desocupar_espacio(std::string patente);
