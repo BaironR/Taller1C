@@ -1,7 +1,7 @@
 #pragma once
 #include "NodoMPP.h"
-#include "Vehiculo.h"
 class ListaFilaMPP{
+
 private:
 	NodoMPP* cabeza;
 public:
