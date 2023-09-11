@@ -1,4 +1,5 @@
 #include "Menu.h"
+#include "MPP.h"
 #include <ctime>
 #include <cstdlib>
 #include <string>
@@ -12,21 +13,21 @@ Menu::Menu(){
 void Menu::iniciar(){
 
 	while (true) {
-		std::cout<<
-			       "****************************************\n"  
-			       "             Menú sistema PAL           \n" 
-			       "****************************************\n" 
-			       "[1] Estacionar vehículo\n" 
-			       "[2] Desocupar espacio\n" 
-			       "[3] Visualizar estacionamiento\n" 
-			       "[4] Ver registros\n" 
-			       "[5] Cerrar programa\n";
+		std::cout <<
+			"****************************************\n"
+			"             Menú sistema PAL           \n"
+			"****************************************\n"
+			"[1] Estacionar vehículo\n"
+			"[2] Desocupar espacio\n"
+			"[3] Visualizar estacionamiento\n"
+			"[4] Ver registros\n"
+			"[5] Cerrar programa" << std::endl;
 
 		std::string opcion;
 		std::cin >> opcion;
 
 		if (opcion == "5"){
-		    std::cout << "Programa finalizado. Muchas gracias";
+		    std::cout << "Programa finalizado. Muchas gracias" << std::endl;
 			break;
 		}
 
@@ -69,10 +70,36 @@ void Menu::estacionar_vehiculo(){
 	}
 
 	conjunto.clear();
+	MPP* matriz = new MPP();
+	int fila = 1;
+	int columna = 1;
+	int n = 0;
 
 	while (!cola.empty()) {
 		Vehiculo* vehiculo = cola.front();
-		std::cout << "Patente: " << vehiculo->get_patente() << std::endl;
+
+		if (!(fila % 2 + 3*n)){
+
+			matriz->agregar(vehiculo, fila, columna);
+			columna++;
+
+			if (columna == 31) {
+				columna = 1;
+				fila++;
+			}
+
+			if (fila > 30) {
+				return;
+			}
+		}
+
+		else {
+			fila++;
+			columna = 1;
+			matriz->agregar(vehiculo, fila, columna);
+			n++;
+		}
+
 		cola.pop();
 		delete vehiculo; // Liberar la memoria asignada a los objetos Vehiculo
 	}

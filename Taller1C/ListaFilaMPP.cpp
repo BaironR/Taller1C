@@ -7,7 +7,7 @@ ListaFilaMPP::ListaFilaMPP(){
 
 void ListaFilaMPP::agregar(Vehiculo* vehiculo, int fila, int columna){
 
-	if (fila > 0 && columna > 0) {
+	if (fila > 0 && columna > 0 && fila <= 30 && columna <=30) {
 
 		NodoMPP* nodo = new NodoMPP(vehiculo, fila, columna);
 
