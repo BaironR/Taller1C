@@ -7,7 +7,7 @@ ListaFilaMPP::ListaFilaMPP(){
 
 void ListaFilaMPP::agregar(Vehiculo* vehiculo, int fila, int columna){
 
-	if (fila >= 0 && columna >= 0) {
+	if (fila > 0 && columna > 0) {
 
 		NodoMPP* nodo = new NodoMPP(vehiculo, fila, columna);
 
@@ -20,9 +20,9 @@ void ListaFilaMPP::agregar(Vehiculo* vehiculo, int fila, int columna){
 		NodoMPP* actual = this->cabeza->get_izquierdo();
 		NodoMPP* anterior = this->cabeza;
 
-		while (actual != this->cabeza && actual->get_columna() > columna){
-			anterior = this->cabeza->get_izquierdo();
-			actual = this->cabeza->get_izquierdo();
+		while (actual != this->cabeza && actual->get_columna() < columna){
+			anterior = actual;
+			actual = actual->get_izquierdo();
 		}
 
 		nodo->set_izquierdo(actual);
