@@ -139,8 +139,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ListaColumnaMPP.cpp" />
-    <ClCompile Include="ListaFilaMPP.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="MPP.cpp" />
     <ClCompile Include="NodoMPP.cpp" />
@@ -148,8 +146,6 @@
     <ClCompile Include="Vehiculo.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ListaColumnaMPP.h" />
-    <ClInclude Include="ListaFilaMPP.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="MPP.h" />
     <ClInclude Include="NodoMPP.h" />

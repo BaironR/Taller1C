@@ -1,8 +1,12 @@
 #pragma once
-#include <iostream>
-#include <ctime>
-#include <cstdlib>
+#include "MPP.h"
 class Menu{
+
+private:
+	MPP* matriz;
+	int fila = 1;
+	int columna = 1;
+	int n = 0;
 
 public:
 	Menu();
