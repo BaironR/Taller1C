@@ -90,11 +90,65 @@ Vehiculo* MPP::obtener_vehiculo(int fila, int columna){
 		if (aux->get_columna() == columna) {
 			return aux->get_vehiculo();
 		}
-
 		aux = aux->get_izquierdo();
 	}
 
 	return nullptr;
+}
+
+int* MPP::eliminar_patente(std::string patente){
+
+	int* arreglo = new int[2];
+
+	for (int i = 1; i < 30; i++) {
+
+		NodoMPP* actual = filas[i]->get_izquierdo();
+		NodoMPP* anterior = filas[i];
+
+		while (actual != filas[i]) {
+
+			if (actual->get_vehiculo()->get_patente() == patente) {
+				anterior->set_izquierdo(actual->get_izquierdo());
+				arreglo[0] = actual->get_fila();
+			}
+
+			anterior = actual;
+			actual = actual->get_izquierdo();
+		}
+
+		NodoMPP* actualCol = columnas[i]->get_superior();
+		NodoMPP* anteriorCol = columnas[i];
+
+		while (actualCol != columnas[i]) {
+
+			if (actualCol->get_vehiculo()->get_patente() == patente) {
+				anteriorCol->set_superior(actualCol->get_superior());
+				arreglo[1] = actualCol->get_columna();
+				delete actualCol;
+				return arreglo;
+			}
+
+			anteriorCol = actualCol;
+			actualCol = actualCol->get_superior();
+		}
+	}
+
+	return nullptr;
+}
+
+void MPP::lista_patentes(){
+
+	std::cout << "Lista de patentes del estacionamiento" << std::endl;
+
+	for (int fila = 1; fila <= 30; fila++) {
+	
+		NodoMPP* aux = filas[fila]->get_izquierdo();
+
+		while (aux != filas[fila]) {
+			std::cout << aux->get_vehiculo()->get_patente() << std::endl;
+			aux = aux->get_izquierdo();
+		}	
+	}
 }
 
 bool MPP::esta_llena() {
@@ -105,5 +159,7 @@ bool MPP::esta_llena() {
 			return false;
 		}
 	}
+
+	return true;
 }
 

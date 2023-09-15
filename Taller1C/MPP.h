@@ -14,6 +14,8 @@ public:
 	void agregar_a_columna(NodoMPP* nodo, int columna);
 	void ver_estacionamiento();
 	Vehiculo* obtener_vehiculo(int fila, int columna);
+	int* eliminar_patente(std::string patente);
+	void lista_patentes();
 	bool esta_llena();
 };
 
