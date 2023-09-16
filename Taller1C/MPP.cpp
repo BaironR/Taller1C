@@ -61,7 +61,7 @@ void MPP::agregar(Vehiculo* vehiculo, int fila, int columna){
 	if (fila > 0 && fila <= 30 && columna > 0 && columna <= 30) {
 
 		NodoMPP* nodo = new NodoMPP(vehiculo, fila, columna);
-		agregar_a_fila(nodo,fila);
+		agregar_a_fila(nodo, fila);
 		agregar_a_columna(nodo, columna);
 	}
 }
@@ -100,40 +100,56 @@ int* MPP::eliminar_patente(std::string patente){
 
 	int* arreglo = new int[2];
 
-	for (int i = 1; i < 30; i++) {
+	for (int i = 1; i <= 30; i++) {
+		eliminar_de_fila(patente, arreglo, i);
+	}
 
-		NodoMPP* actual = filas[i]->get_izquierdo();
-		NodoMPP* anterior = filas[i];
+	for (int i = 1; i <= 30; i++) {
+		eliminar_de_columna(patente, arreglo, i);
 
-		while (actual != filas[i]) {
-
-			if (actual->get_vehiculo()->get_patente() == patente) {
-				anterior->set_izquierdo(actual->get_izquierdo());
-				arreglo[0] = actual->get_fila();
-			}
-
-			anterior = actual;
-			actual = actual->get_izquierdo();
-		}
-
-		NodoMPP* actualCol = columnas[i]->get_superior();
-		NodoMPP* anteriorCol = columnas[i];
-
-		while (actualCol != columnas[i]) {
-
-			if (actualCol->get_vehiculo()->get_patente() == patente) {
-				anteriorCol->set_superior(actualCol->get_superior());
-				arreglo[1] = actualCol->get_columna();
-				delete actualCol;
-				return arreglo;
-			}
-
-			anteriorCol = actualCol;
-			actualCol = actualCol->get_superior();
+		if (arreglo[0] > 0 && arreglo[1] > 0) {
+			return arreglo;
 		}
 	}
 
 	return nullptr;
+}
+
+void MPP::eliminar_de_fila(std::string patente, int* arreglo, int fila) {
+
+	NodoMPP* actual = filas[fila]->get_izquierdo();
+	NodoMPP* anterior = filas[fila];
+
+	while (actual != filas[fila]) {
+
+		if (actual->get_vehiculo()->get_patente() == patente) {
+			arreglo[0] = actual->get_fila();
+			anterior->set_izquierdo(actual->get_izquierdo());
+			return;
+		}
+
+		anterior = actual;
+		actual = actual->get_izquierdo();
+	}
+}
+
+void MPP::eliminar_de_columna(std::string patente, int* arreglo, int columna){
+
+	NodoMPP* actualCol = columnas[columna]->get_superior();
+	NodoMPP* anteriorCol = columnas[columna];
+
+	while (actualCol != columnas[columna]) {
+
+		if (actualCol->get_vehiculo()->get_patente() == patente) {
+			arreglo[1] = actualCol->get_columna();
+			anteriorCol->set_superior(actualCol->get_superior());
+			delete actualCol;
+			return;
+		}
+
+		anteriorCol = actualCol;
+		actualCol = actualCol->get_superior();
+	}
 }
 
 void MPP::lista_patentes(){
@@ -145,7 +161,7 @@ void MPP::lista_patentes(){
 		NodoMPP* aux = filas[fila]->get_izquierdo();
 
 		while (aux != filas[fila]) {
-			std::cout << aux->get_vehiculo()->get_patente() << std::endl;
+			std::cout << aux->get_vehiculo()->get_patente() << " Fila:" << fila << " Columna: "<< aux->get_columna() << std::endl;
 			aux = aux->get_izquierdo();
 		}	
 	}

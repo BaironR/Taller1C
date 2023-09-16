@@ -15,6 +15,8 @@ public:
 	void ver_estacionamiento();
 	Vehiculo* obtener_vehiculo(int fila, int columna);
 	int* eliminar_patente(std::string patente);
+	void eliminar_de_fila(std::string patente, int* arreglo, int fila);
+	void eliminar_de_columna(std::string patente, int* arreglo, int columna);
 	void lista_patentes();
 	bool esta_llena();
 };

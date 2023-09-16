@@ -34,8 +34,8 @@ void Menu::iniciar(){
 				int opcionInt = std::stoi(opcion);
 
 				if (opcionInt == 5) {
-					std::cout << "Programa finalizado. Muchas gracias" << std::endl;
-					break;
+					std::cout << "Programa finalizado, muchas gracias." << std::endl;
+					return;
 				}
 
 				switch (opcionInt) {
@@ -76,7 +76,7 @@ void Menu::iniciar(){
 				std::cerr << "Excepcion de tipo: " << e.what() << " Ingrese una opcion valida" << std::endl;
 
 			} catch (const std::out_of_range& e) {
-				std::cerr << "Excepcion de tipo std::out_of_range: " << e.what() << " Fuera del rango, ingrese una opcion valida" << std::endl;
+				std::cerr << "Excepcion de tipo std::out_of_range: " << e.what() << " Ingrese una opcion valida" << std::endl;
 			}
 
 		}while(true);
@@ -210,13 +210,12 @@ void Menu::rellenar_espacios_desocupados(){
 			int* espacio_a_ocupar = espacios_desocupados.top();
 			this->fila = espacio_a_ocupar[0];
 			this->columna = espacio_a_ocupar[1];
-			this->matriz->agregar(vehiculo, fila, columna);
+			this->matriz->agregar(vehiculo, this->fila, this->columna);
 			contador_vehiculos_agregados++;
 			cola.pop();
 			espacios_desocupados.pop();
 
 		} else {
-
 			break;
 		}
 	}
@@ -234,7 +233,7 @@ void Menu::rellenar_espacios_desocupados(){
 			this->columna = 1;
 		}
 
-		this->matriz->agregar(vehiculo, fila, columna++);
+		this->matriz->agregar(vehiculo, this->fila, this->columna++);
 		contador_vehiculos_agregados++;
 
 		if (columna == 31) {
