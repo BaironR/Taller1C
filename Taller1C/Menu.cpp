@@ -66,9 +66,11 @@ void Menu::iniciar(){
 					break;
 
 				case(4):
+					estadisticas();
+					break;
 
 				default:
-					std::cout << "Dicha opcion no existe, intente nuevamente";
+					std::cout << "Dicha opcion no existe, intente nuevamente" << std::endl;
 					break;
 				}
 
@@ -96,6 +98,9 @@ void Menu::estacionar_vehiculo(){
 			std::string tipos[] = { "Auto", "Camioneta","Furgoneta","Moto" };
 			std::string* punt_tipo = &tipos[0];
 			std::string tipo = *(punt_tipo += (rand() % 4));
+			bool tuneados[] = { true, false };
+			bool* punt_esta_tuneado = &tuneados[0];
+			bool esta_tuneado = *(punt_esta_tuneado += (rand() % 2));
 			std::string patente;
 
 			for (int i = 0; i < 4; ++i) {
@@ -107,7 +112,7 @@ void Menu::estacionar_vehiculo(){
 			}
 
 
-			Vehiculo* vehiculo = new Vehiculo(patente, tipo);
+			Vehiculo* vehiculo = new Vehiculo(patente, tipo, esta_tuneado);
 
 			if (conjunto.find(vehiculo->get_patente()) == conjunto.end()) {
 				cola.push(vehiculo);
@@ -176,6 +181,9 @@ void Menu::rellenar_espacios_desocupados(){
 		std::string tipos[] = { "Auto", "Camioneta","Furgoneta","Moto" };
 		std::string* punt_tipo = &tipos[0];
 		std::string tipo = *(punt_tipo += (rand() % 4));
+		bool tuneados[] = { true, false };
+		bool* punt_esta_tuneado = &tuneados[0];
+		bool esta_tuneado = *(punt_esta_tuneado += (rand() % 2));
 		std::string patente;
 
 		for (int i = 0; i < 4; ++i) {
@@ -186,7 +194,7 @@ void Menu::rellenar_espacios_desocupados(){
 			patente += '0' + (rand() % 10);
 		}
 
-		Vehiculo* vehiculo = new Vehiculo(patente, tipo);
+		Vehiculo* vehiculo = new Vehiculo(patente, tipo, esta_tuneado);
 
 		if (conjunto.find(vehiculo->get_patente()) == conjunto.end()) {
 			cola.push(vehiculo);
@@ -251,6 +259,6 @@ void Menu::ver_estacionamiento(){
 	this->matriz->ver_estacionamiento();
 }
 
-void Menu::estadisticas()
-{
+void Menu::estadisticas(){
+	this->matriz->ver_estadisticas();
 }

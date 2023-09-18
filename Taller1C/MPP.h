@@ -19,5 +19,6 @@ public:
 	void eliminar_de_columna(std::string patente, int* arreglo, int columna);
 	void lista_patentes();
 	bool esta_llena();
+	void ver_estadisticas();
 };
 

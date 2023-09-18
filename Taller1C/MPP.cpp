@@ -179,3 +179,54 @@ bool MPP::esta_llena() {
 	return true;
 }
 
+void MPP::ver_estadisticas(){
+
+	double contador_de_vehiculos = 0;
+	double contador_de_autos = 0;
+	double contador_de_motos = 0;
+	double contador_de_furgonetas = 0;
+	double contador_de_camionetas = 0;
+	double contador_tuneados = 0;
+
+	for (int fila = 1; fila <= 30; fila++) {
+		for (int columna = 1; columna <= 30; columna++) {
+			Vehiculo* vehiculo = obtener_vehiculo(fila, columna);
+			if (vehiculo != nullptr) {
+				contador_de_vehiculos++;
+				
+				if (vehiculo->get_tipo() == "Auto") {
+					contador_de_autos++;
+
+				} else if (vehiculo->get_tipo() == "Moto") {
+					contador_de_motos++;
+
+				} else if (vehiculo->get_tipo() == "Camioneta") {
+					contador_de_camionetas++;
+				}
+				else if (vehiculo->get_tipo() == "Furgoneta") {
+					contador_de_furgonetas++;
+				}
+
+				if (vehiculo->get_esta_tuneado()) {
+					contador_tuneados++;
+				}
+			}
+		}
+	}
+
+	std::cout << "El porcentaje de espacios ocupados es del " << (contador_de_vehiculos/600) * 100 << "% con " << contador_de_vehiculos << " espacios ocupados de 600 en total" <<std::endl;
+
+	if (contador_de_vehiculos > 0) {
+
+		std::cout << "Porcentaje de vehiculos por tipo: \n"
+			"Autos: " << (contador_de_autos / contador_de_vehiculos) * 100 << "% con: " << contador_de_autos << " autos" << "\n"
+			"Motos: " << (contador_de_motos / contador_de_vehiculos) * 100 << "% con: " << contador_de_motos << " motos" << "\n"
+			"Furgonetas: " << (contador_de_furgonetas / contador_de_vehiculos) * 100 << "% con: " << contador_de_furgonetas << " furgonetas" << "\n"
+			"Camionetas: " << (contador_de_camionetas / contador_de_vehiculos) * 100 << "% con: " << contador_de_camionetas << " camionetas" << "\n"
+			"Haciendo un total de: " << contador_de_vehiculos << " vehiculos" << std::endl;
+		std::cout << "Hay un " << (contador_tuneados / contador_de_vehiculos) * 100 << "% de vehiculos tuneados" << std::endl;
+	} else {
+		std::cout << "No hay vehiculos ingresados en el sistema" << std::endl;
+	}
+}
+
