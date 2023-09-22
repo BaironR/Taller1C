@@ -2,25 +2,28 @@
 
 /*
 Constructor de la matriz poco poblada.
-Se inicializa primeramente, insertando un objeto nulo a los vectores que representan las columnas y filas (haciendo
-referencia a la columna y fila 0, en el que no debe haber nada ya que acá están los nodos). Luego en un ciclo for,
-se inicializan nodos para las columnas y filas, con sus respectivos valores en 0 (fila 0 para las columnas, columna 0
-para las filas). Después se agregan a cada vector, y se referencian a sí mismos (los de las filas, como su nodo izquierdo, 
-y los de las columnas, como su nodo superior).
+Los punteros de columnas y filas se inicializan como vectores de punteros a nodos, de 31 espacios.
+Después, se inserta un objeto nulo a los vectores que representan las columnas y filas, en el primer espacio (0, haciendo
+referencia a la columna y fila 0, en el que no debe haber nada ya que la matriz poco poblada empieza desde el espacio 1). 
+Luego en un ciclo for, se inicializan nodos para las columnas y filas, con sus respectivos valores en 0 
+(fila 0 para las columnas, columna 0 para las filas). Después se agregan a cada vector, y se referencian a sí mismos 
+(los de las filas, como su nodo izquierdo, y los de las columnas, como su nodo superior).
 */
 MPP::MPP(){
 
-	//Primer elemento NULL (fila/columna 0).
-	columnas.push_back(NULL);
-	filas.push_back(NULL);
+	columnas = new NodoMPP* [31];
+	filas = new NodoMPP * [31];
 
+	//Primer elemento NULL (fila/columna 0).
+	columnas[0] = NULL;
+	filas[0] = NULL;
 
 	//Ciclo for desde casilla 1 al 30, inicializando nodos.
 	for (int i = 1; i <= 30; i++) {
 		NodoMPP* cabezaColumna = new NodoMPP(NULL,0,NULL); //Nodo cabeza de columna.
 		NodoMPP* cabezaFila = new NodoMPP(NULL, NULL, 0); //Nodo cabeza de fila
-		columnas.push_back(cabezaColumna); 
-		filas.push_back(cabezaFila);
+		columnas[i] = cabezaColumna;
+		filas[i] = cabezaFila;
 		cabezaColumna->set_superior(cabezaColumna); //Referencias a sí mismos (superior-columna, izquierda-fila).
 		cabezaFila->set_izquierdo(cabezaFila);
 	}

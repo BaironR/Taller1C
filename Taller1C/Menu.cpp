@@ -41,7 +41,7 @@ void Menu::iniciar(){
 					"[1] Estacionar vehiculo\n"
 					"[2] Desocupar espacio\n"
 					"[3] Visualizar estacionamiento\n"
-					"[4] Ver registros\n"
+					"[4] Ver estadisticas\n"
 					"[5] Cerrar programa" << std::endl;
 
 				std::cin >> opcion;
@@ -53,21 +53,18 @@ void Menu::iniciar(){
 				//Si el usuario ingresa 5, se termina el programa.
 				if (opcionInt == 5) {
 					std::cout << "Programa finalizado, muchas gracias." << std::endl;
-					delete matriz;
 					return;
 				}
 
 				switch (opcionInt) {
 
 				case(1):
-
+					std::cout << "[1] Estacionar vehiculo(s)" << std::endl;
 					//En caso de que se elija la opción 1 (estacionar vehículo), se comprueba si hay espacios
 					//desocupados (pila vacía o no). En el caso de que la pila esté vacía se procede al método
 					//estacionar vehículo. Si no está vacía, se ejecuta el método de rellenar espacios desocupados.
-
 					if (espacios_desocupados.empty()) {
 						estacionar_vehiculo();
-
 					}
 					else {
 						rellenar_espacios_desocupados();
@@ -76,6 +73,7 @@ void Menu::iniciar(){
 
 				case(2):
 				{
+					std::cout << "[2] Desocupar espacio " << std::endl;
 					//Opción 2: desocupar espacio.
 					//Primeramente se pide al usuario ingresar la patente a eliminar.
 					//Después se imprime la lista completa de las patentes de los autos estacionados (método de la matriz).
@@ -90,12 +88,14 @@ void Menu::iniciar(){
 				}
 
 				case(3):
+					std::cout << "[3] Visualizar estacionamiento " << std::endl;
 					//Opción 3: visualizar estacionamiento. Se ejecuta el método que permite ver las posiciones
 					//ocupadas y desocupadas.
 					ver_estacionamiento();
 					break;
 
 				case(4):
+					std::cout << "[4] Ver estadisticas " << std::endl;
 					//Opción 4: obtener estadísticas. La matriz ejecuta su método de obtener estadísticas.
 					estadisticas();
 					break;
@@ -113,7 +113,7 @@ void Menu::iniciar(){
 				//Captura de excepción (argumento inválido).
 				//Se captura una excepción producida por la conversión fallida de string a int
 				//(El usuario ingresa un caracter no numérico).
-				std::cerr << "Excepcion de tipo: " << e.what() << " Ingrese una opcion valida. " << std::endl;
+				std::cerr << "Excepcion de tipo: " << e.what() << std::endl << " Ingrese una opcion valida. " << std::endl;
 
 			}
 			catch (const std::out_of_range& e) {
@@ -299,7 +299,7 @@ void Menu::desocupar_espacio(std::string patente) {
 		std::cout << "Se desocupo un espacio en la posicion " << "Fila: " << espacio_desocupado[0] << " Columna: " << espacio_desocupado[1] << std::endl;
 	}
 	else {
-		std::cout << "Error: no se pudo eliminar el vehículo porque no existe. Intente de nuevo. " << std::endl;
+		std::cout << "Error: no se pudo eliminar el vehiculo porque no existe. Intente de nuevo. " << std::endl;
 	}
 }
 
@@ -439,7 +439,6 @@ Ver estacionamiento.
 Solamente se ejecuta el método de la matriz para imprimir el estacionamiento.
 */
 void Menu::ver_estacionamiento(){
-	std::cout << "Visualizar estacionamiento: " << std::endl;
 	std::cout << "'A' representan los espacios ocupados por vehiculos. " << std::endl;
 	std::cout << "'.' representan los espacios desocupados. " << std::endl;
 	std::cout << "'+' representan los espacios no estacionables. " << std::endl;

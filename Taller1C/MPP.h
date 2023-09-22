@@ -1,10 +1,8 @@
 #pragma once
-#include <vector>
 #include "NodoMPP.h"
 /*
 La clase de la matriz poco poblada (MPP).
-Como atributos privados, se posee la fila de columnas, y la columna de filas de nodos de la matriz.
-La columna y fila son declarados como vectores de punteros a nodos.
+Como atributos privados, se posee la fila de columnas, y la columna de filas de nodos de la matriz, en forma de punteros..
 Como métodos públicos, se poseen: el constructor de la matriz, el método de agregar un nodo a la matriz,
 agregar a fila y columna, el método para imprimir el estacionamiento, obtener un vehículo a partir de la fila y columna,
 eliminar un vehículo a partir de la patente, eliminar un nodo de una fila y columna (pasando como parámetro un puntero a
@@ -13,8 +11,8 @@ booleano para comprobar si la matriz está vacía, y un método para visualizar est
 */
 class MPP{
 private:
-	std::vector<NodoMPP*> columnas; //Vector de punteros a nodos, la fila de columnas.
-	std::vector<NodoMPP*> filas; //Vector de punteros a nodos, la columna de filas.
+	NodoMPP** columnas;
+	NodoMPP** filas;
 public:
 	MPP(); //Constructor de la matriz poco poblada.
 	void agregar(Vehiculo* vehiculo, int fila, int columna); //Agregar vehículo a la matriz.
