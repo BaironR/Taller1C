@@ -118,14 +118,36 @@ Por cada fila se salta una línea.
 */
 void MPP::ver_estacionamiento(){
 
+	int filas_estacionables[] = {1,3,4,6,7,9,10,12,13,15,16,18,19,21,22,24,25,27,28,30};
+	int* puntero_estacionables = &filas_estacionables[0];
+
 	for (int fila = 1; fila <= 30; fila++) {
+
+		bool estacionable = false;
+
+		for (int i = 0; i < 20; i++){
+			if (fila == filas_estacionables[i]) {
+				estacionable = true;
+			}
+
+			if (filas_estacionables[i] > fila) {
+				break;
+			}
+		}
+
 		for (int columna = 1; columna <= 30; columna++) {
-			Vehiculo* vehiculo = obtener_vehiculo(fila, columna);
-			if (vehiculo != nullptr) {
-				//Si existe un vehículo con cierta fila y columna, se imprime una "A ".
-				std::cout << "A ";
-			} else {
-				std::cout << ". "; // Agrega espacios para alinear las columnas
+			if (estacionable) {
+				Vehiculo* vehiculo = obtener_vehiculo(fila, columna);
+				if (vehiculo != nullptr) {
+					//Si existe un vehículo con cierta fila y columna, se imprime una "A ".
+					std::cout << "A ";
+				}
+				else {
+					std::cout << ". "; // Agrega espacios para alinear las columnas
+				}
+			}
+			else {
+				std::cout << "+ ";
 			}
 		}
 		std::cout << std::endl; // Cambia de línea después de cada fila

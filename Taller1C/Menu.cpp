@@ -53,6 +53,7 @@ void Menu::iniciar(){
 				//Si el usuario ingresa 5, se termina el programa.
 				if (opcionInt == 5) {
 					std::cout << "Programa finalizado, muchas gracias." << std::endl;
+					delete matriz;
 					return;
 				}
 
@@ -438,6 +439,11 @@ Ver estacionamiento.
 Solamente se ejecuta el método de la matriz para imprimir el estacionamiento.
 */
 void Menu::ver_estacionamiento(){
+	std::cout << "Visualizar estacionamiento: " << std::endl;
+	std::cout << "'A' representan los espacios ocupados por vehiculos. " << std::endl;
+	std::cout << "'.' representan los espacios desocupados. " << std::endl;
+	std::cout << "'+' representan los espacios no estacionables. " << std::endl;
+	std::cout << std::endl;
 	this->matriz->ver_estacionamiento();
 }
 
