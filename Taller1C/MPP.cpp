@@ -114,9 +114,11 @@ void MPP::agregar(Vehiculo* vehiculo, int fila, int columna){
 /*
 Ver estacionamiento.
 En este método se imprime el estacionamiento, indicando los espacios ocupados y desocupados, reflejados
-en la estructura actual de la matriz. Se va recorriendo por filas, iterando entre las columnas. Se llama al
-método de obtener vehículo (con la fila y columna actuales). En caso que el método no retorne null (o sea, que
-un vehículo existe en esa posición), se imprime una 'A'. En caso contrario, un punto para los espacios desocupados.
+en la estructura actual de la matriz. Se va recorriendo por filas, iterando entre las columnas. A su vez, también se 
+utiliza un vector con las filas que se pueden estacionar, para comprobar si se está en una fila aparcable o no (recorriendo 
+con un ciclo for). Se llama al método de obtener vehículo (con la fila y columna actuales). En caso que el método no retorne null 
+(o sea, que un vehículo existe en esa posición), se imprime una 'A'. Para los espacios desocupados que se pueden estacionar, un punto
+('.'). Para las filas que no se puede estacionar, se imprime un signo más ('+').
 Por cada fila se salta una línea.
 */
 void MPP::ver_estacionamiento(){
@@ -129,10 +131,14 @@ void MPP::ver_estacionamiento(){
 		bool estacionable = false;
 
 		for (int i = 0; i < 20; i++){
+
+			//Ciclo que permite verificar si la que se está por imprimir se puede estacionar.
 			if (fila == filas_estacionables[i]) {
 				estacionable = true;
 			}
 
+			//Si el término actual del arreglo de filas estacionables es mayor a la fila actual por imprimir,
+			//es porque ya se pasó esa fila y no se puede estacionar ahí.
 			if (filas_estacionables[i] > fila) {
 				break;
 			}
@@ -150,6 +156,7 @@ void MPP::ver_estacionamiento(){
 				}
 			}
 			else {
+				//Fila que no se puede estacionar.
 				std::cout << "+ ";
 			}
 		}
