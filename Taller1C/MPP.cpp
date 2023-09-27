@@ -52,7 +52,7 @@ void MPP::agregar_a_fila(NodoMPP* nodo, int fila) {
 
 
 	while (actual2 != filas[fila] && actual2->get_fila() < fila) {
-		//Iteración hasta que el nodo actual se posicione en la fila que se desea agregar el nodo.
+		//Iteración hasta que el nodo actual se situe una posicion mas alla de donde se desea agregar el nodo.
 		anterior2 = actual2;
 		actual2 = actual2->get_izquierdo();
 	}
@@ -66,8 +66,8 @@ void MPP::agregar_a_fila(NodoMPP* nodo, int fila) {
 Agregar a columna. 
 Se realiza el mismo procedimiento que en agregar a fila, pero esta vez con una columna especificada.
 En primer lugar se comprueba si la columna está vacía, si es así se agrega el nodo con su referencia superior a 
-la cabeza. Mediante el nodo actual y el nodo superior, se itera por la columna hasta que el nuevo nodo se situe en la columna 
-que se desea agregar, para poder referenciar al nuevo nodo y agregarlo a la matriz.
+la cabeza. Mediante el nodo actual y el nodo superior, se itera por la columna hasta que el nodo actual se situe una posicion mas alla 
+de donde se desea agregar el nodo, para poder referenciar al nuevo nodo y agregarlo a la matriz entre el nodo anterior y el nodo actual.
 */
 void MPP::agregar_a_columna(NodoMPP* nodo, int columna) {
 
