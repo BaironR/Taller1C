@@ -15,6 +15,7 @@ private:
 	NodoMPP** filas;
 public:
 	MPP(); //Constructor de la matriz poco poblada.
+	~MPP(); //Destructor de la matriz poco poblada.
 	void agregar(Vehiculo* vehiculo, int fila, int columna); //Agregar vehículo a la matriz.
 	void agregar_a_fila(NodoMPP* nodo, int fila); //Agregar vehículo a una fila especificada.
 	void agregar_a_columna(NodoMPP* nodo, int columna); //Agregar vehículo a una columna especificada.

@@ -16,6 +16,13 @@ NodoMPP::NodoMPP(Vehiculo* vehiculo, int fila, int columna){
 	this->vehiculo = vehiculo;
 }
 
+/*
+Destructor del nodoMPP, elimina el vehiculo que contiene
+*/
+NodoMPP::~NodoMPP(){
+	delete vehiculo;
+}
+
 //Retornar el nodo izquierdo.
 NodoMPP* NodoMPP::get_izquierdo() {
 	return this->izquierdo;

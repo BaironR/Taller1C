@@ -12,7 +12,7 @@ Luego en un ciclo for, se inicializan nodos para las columnas y filas, con sus r
 MPP::MPP(){
 
 	columnas = new NodoMPP* [31];
-	filas = new NodoMPP * [31];
+	filas = new NodoMPP* [31];
 
 	//Primer elemento NULL (fila/columna 0).
 	columnas[0] = NULL;
@@ -28,6 +28,30 @@ MPP::MPP(){
 		cabezaFila->set_izquierdo(cabezaFila);
 	}
 }
+
+/*
+Destructor de la matriz poco poblada.
+Se elimina recursivamente los nodos y vehiculos contenidos en dichos nodos.
+En cada iteracion se obtiene un puntero a la fila actual, que contiene la cabecera de dicha fila. Luego se obtiene 
+un puntero al primero nodo de la fila actual llamado aux. 
+Se inicia un ciclo while para recorrer los nodos de la fila, por cada iteracion se crea un nodo que almacena el 
+nodo siguiente al auxiliar, para poder eliminar el nodo auxiliar sin perder la referencia al siguiente nodo. Posteriormente el nodo
+auxiliar se iguala al nodo siguiente para seguir recorriendo la matriz y eliminar los nodos que contiene.
+*/
+MPP::~MPP(){
+
+	for (int i = 1; i <= 30; i++) {	
+		NodoMPP* filaActual = filas[i];
+		NodoMPP* aux = filaActual->get_izquierdo();
+
+		while (aux != filaActual) {
+			NodoMPP* nodoSiguiente = aux->get_izquierdo();
+			delete aux;
+			aux = nodoSiguiente;
+		}
+	}
+}
+
 
 /*
 Agregar a fila.
@@ -99,7 +123,6 @@ En ese caso, se crea el nuevo nodo que almacena el vehículo, y se llama a los mé
 y agregar en columna.
 */
 void MPP::agregar(Vehiculo* vehiculo, int fila, int columna){
-
 
 	//Se agrega si los valores fila y columna son mayores a 0 o, iguales o menores a 30.
 	if (fila > 0 && fila <= 30 && columna > 0 && columna <= 30) {
@@ -241,7 +264,6 @@ void MPP::eliminar_de_fila(std::string patente, int* arreglo, int fila) {
 	//Nodo actual y anterior.
 	NodoMPP* actual = filas[fila]->get_izquierdo();
 	NodoMPP* anterior = filas[fila];
-
 
 	while (actual != filas[fila]) {
 

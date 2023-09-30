@@ -50,9 +50,10 @@ void Menu::iniciar(){
 				int opcionInt = std::stoi(opcion);
 
 
-				//Si el usuario ingresa 5, se termina el programa.
+				//Si el usuario ingresa 5, se termina el programa, eliminando los elementos contenidos en memoria.
 				if (opcionInt == 5) {
 					std::cout << "Programa finalizado, muchas gracias." << std::endl;
+					delete this->matriz;
 					return;
 				}
 

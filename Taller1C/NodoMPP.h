@@ -17,6 +17,7 @@ private:
 	Vehiculo* vehiculo; //Vehículo almacenado.
 public:
 	NodoMPP(Vehiculo* vehiculo, int fila, int columna); //Constructor del nodo.
+	~NodoMPP();
 	NodoMPP* get_izquierdo(); //Obtener nodo izquierdo.
 	NodoMPP* get_superior(); //Obtener nodo superior.
 	void set_izquierdo(NodoMPP* izquierdo); //Designar nodo izquierdo.
